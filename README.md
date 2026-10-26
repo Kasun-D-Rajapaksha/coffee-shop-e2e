@@ -2,7 +2,9 @@
 
 Cypress end-to-end tests for the [Ember & Cream](https://github.com/Kasun-D-Rajapaksha/coffee-shop) static coffee shop site.
 
-**Default target (CI):** [https://kasun-d-rajapaksha.github.io/coffee-shop/](https://kasun-d-rajapaksha.github.io/coffee-shop/)
+**Production URL:** [https://kasun-d-rajapaksha.github.io/coffee-shop/](https://kasun-d-rajapaksha.github.io/coffee-shop/)
+
+**Primary CI** runs from the [coffee-shop](https://github.com/Kasun-D-Rajapaksha/coffee-shop) repo: it serves the site under test locally, runs this Cypress suite, and deploys to GitHub Pages only when tests pass (see `coffee-shop/.github/workflows/ci-cd.yml`).
 
 ## Prerequisites
 
@@ -54,7 +56,12 @@ CYPRESS_BASE_URL=https://your-preview.example/ npm run test:e2e
 
 ## CI
 
-GitHub Actions runs Cypress on every push and pull request to `main` (see `.github/workflows/cypress.yml`).
+| Pipeline | When it runs | What it tests |
+|----------|----------------|---------------|
+| [coffee-shop CI/CD](https://github.com/Kasun-D-Rajapaksha/coffee-shop/blob/main/.github/workflows/ci-cd.yml) | PR and push to `main` on the site repo | The commit/PR site code at `http://127.0.0.1:8080` |
+| [Production smoke](.github/workflows/cypress.yml) | Weekly and manual dispatch | Live GitHub Pages |
+
+Local default (`npm run test:e2e`) targets production Pages unless you set `CYPRESS_BASE_URL` or use `npm run test:e2e:local`.
 
 ## Related repos
 
