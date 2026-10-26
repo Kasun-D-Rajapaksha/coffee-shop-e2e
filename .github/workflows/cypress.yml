@@ -1,13 +1,13 @@
-name: Cypress E2E
+name: Production smoke (Pages)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
 
 jobs:
   cypress-run:
+    name: Cypress against live site
     runs-on: ubuntu-latest
     env:
       CYPRESS_BASE_URL: https://kasun-d-rajapaksha.github.io/coffee-shop/
