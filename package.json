@@ -1,0 +1,14 @@
+{
+  "name": "coffee-shop-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cypress E2E tests for Ember & Cream coffee shop site",
+  "scripts": {
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "test:e2e:local": "CYPRESS_BASE_URL=http://127.0.0.1:8080 cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^14.3.2"
+  }
+}

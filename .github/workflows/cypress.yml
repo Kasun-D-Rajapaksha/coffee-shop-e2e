@@ -1,0 +1,31 @@
+name: Cypress E2E
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    env:
+      CYPRESS_BASE_URL: https://kasun-d-rajapaksha.github.io/coffee-shop/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+        env:
+          CYPRESS_BASE_URL: ${{ env.CYPRESS_BASE_URL }}
+
+      - name: Upload screenshots on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
